@@ -1,4 +1,4 @@
-FROM inikolaev/jdk
+FROM inikolaev/jdk:latest
 
 USER root
 RUN apt-get update
