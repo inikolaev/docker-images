@@ -1,6 +1,6 @@
 FROM debian:jessie
 
-COPY apt-install /
+COPY apt-install apt-remove /
 
 ############
 # Oracle JDK
@@ -18,9 +18,7 @@ USER root
 RUN /apt-install wget \
     && cd /tmp \
     && wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}-b${JAVA_BUILD}/jdk-${JAVA_VERSION}-linux-x64.tar.gz \
-    && apt-get remove -y --purge wget \
-    && apt-get autoremove -y \
-    && apt-get clean \
+    && /apt-remove wget \
     && mkdir jdk-${JAVA_VERSION}-linux-x64 \
     && tar -zxvf jdk-${JAVA_VERSION}-linux-x64.tar.gz --directory jdk-${JAVA_VERSION}-linux-x64 --strip-components=1 \
     && mv jdk-${JAVA_VERSION}-linux-x64 ${JAVA_HOME} \
