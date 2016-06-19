@@ -1,8 +1,16 @@
 FROM alpine:latest
 
+COPY ./docker-entrypoint.sh /
+
 RUN apk add --no-cache mysql mysql-client \
     && rm -f /var/cache/apk/* \
-    && mkdir -p /run/mysqld \
-    && mysql_install_db --user=root > /dev/null
+    && awk '{ print } $1 ~ /\[mysqld\]/ && c == 0 { c = 1; print "skip-host-cache\nskip-name-resolve"}' /etc/mysql/my.cnf > /tmp/my.cnf \
+    && mv /tmp/my.cnf /etc/mysql/my.cnf \
+    && mkdir /run/mysqld \
+    && chown -R mysql:mysql /run/mysqld \
+    && chmod -R 777 /run/mysqld
+
 EXPOSE 3306
-CMD mysqld --user=root --console
+VOLUME /var/lib/mysql
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["mysqld", "--user=mysql"]
