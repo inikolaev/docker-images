@@ -8,10 +8,12 @@ RUN addgroup -S nginx \
     && wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz \
     && tar zxvf nginx-${NGINX_VERSION}.tar.gz \
     && cd nginx-${NGINX_VERSION} \
-    && apk --update --no-cache add pcre \
-    && apk --update --no-cache --virtual build-dependencies add alpine-sdk pcre-dev zlib-dev \
+    && apk --update --no-cache add pcre openssl \
+    && apk --no-cache --virtual build-dependencies add alpine-sdk pcre-dev zlib-dev openssl-dev \
     && rm -f /var/cache/apk/* \
     && ./configure \
+                   --with-http_ssl_module \
+                   --with-http_v2_module \
                    --prefix=/opt/nginx-${NGINX_VERSION} \
                    --user=nginx \
                    --group=nginx \
