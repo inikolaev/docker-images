@@ -1,4 +1,11 @@
-# Using this image
+# alpine-mysql
+
+[![Docker Stars](https://img.shields.io/docker/stars/inikolaev/alpine-mysql.svg)][hub]
+[![Docker Pulls](https://img.shields.io/docker/pulls/inikolaev/alpine-mysql.svg)][hub]
+
+[hub]: https://hub.docker.com/r/inikolaev/alpine-mysql/
+
+## Using this image
 Create a volume which will keep your database files:
 ```
 docker volume create --name mysql 
