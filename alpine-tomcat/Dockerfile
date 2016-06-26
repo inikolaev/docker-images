@@ -13,6 +13,9 @@ RUN cd /tmp \
     && mv apache-tomcat-${TOMCAT_VERSION} /opt/tomcat \
     && rm -rf apache-tomcat-${TOMCAT_VERSION} \
     && rm -rf apache-tomcat-${TOMCAT_VERSION}.tar.gz \
+    && awk '/<\/tomcat-users>/ {print "  <user username=\"tomcat\" password=\"tomcat\" roles=\"manager-gui,manager-script,agent\"/>"} {print $0}' \
+           /opt/tomcat/conf/tomcat-users.xml > /tmp/tomcat-users.xml \
+    && mv /tmp/tomcat-users.xml /opt/tomcat/conf/tomcat-users.xml \
     && apk del build-dependencies
 
 EXPOSE 8080
