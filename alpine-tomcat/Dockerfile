@@ -18,7 +18,7 @@ RUN cd /tmp \
     && mv /tmp/tomcat-users.xml /opt/tomcat/conf/tomcat-users.xml \
     && awk '/^common\.loader/ {print "common.loader=\"${catalina.base}/lib\",\"${catalina.base}/lib/*.jar\",\"${catalina.home}/lib\",\"${catalina.home}/lib/*.jar\",\"${catalina.home}/lib/ext\",\"${catalina.home}/lib/ext/*.jar\""} ! /^common\.loader/ {print $0}' \
           /opt/tomcat/conf/catalina.properties > /tmp/catalina.properties \
-    && mv /tmp/catalina.properties /opt/tomcat/conf/catalina.properties
+    && mv /tmp/catalina.properties /opt/tomcat/conf/catalina.properties \
     && apk del build-dependencies
 
 EXPOSE 8080
