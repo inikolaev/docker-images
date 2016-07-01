@@ -13,6 +13,5 @@ RUN addgroup -S mysql \
     && chmod -R 777 /run/mysqld
 
 EXPOSE 3306
-VOLUME /var/lib/mysql
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["mysqld", "--user=mysql"]
