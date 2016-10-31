@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ENV NGINX_VERSION 1.10.1
+ENV NGINX_VERSION 1.10.2
 
 RUN addgroup -S nginx \
     && adduser -S nginx -G nginx \
