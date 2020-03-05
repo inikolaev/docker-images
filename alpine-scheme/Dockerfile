@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ENV SCHEME_VERSION 9.2
+ENV SCHEME_VERSION 10.1.10
 
 RUN cd /tmp \
     && apk --no-cache --update --virtual build-dependencies add build-base m4 \
